@@ -37,6 +37,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fail On Unknown Fields
+    |--------------------------------------------------------------------------
+    |
+    | This option allows you to fail on unknown fields in form requests.
+    | When enabled, the framework will throw a validation error if
+    | the request contains fields that are not defined in the
+    | form request rules.
+    |
+    | Enabled by default.
+    |
+    | Note: This option is only available in Laravel 13.4 and above.
+    |
+    */
+
+    NunoMaduro\Essentials\Configurables\FailOnUnknownFields::class => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Fake Sleep when running tests
     |--------------------------------------------------------------------------
     |
