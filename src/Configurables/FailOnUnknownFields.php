@@ -22,7 +22,7 @@ final readonly class FailOnUnknownFields implements Configurable
      */
     public function configure(): void
     {
-        if (! method_exists(FormRequest::class, 'failOnUnknownFields')) {
+        if (! method_exists(FormRequest::class, 'failOnUnknownFields')) { // @phpstan-ignore function.alreadyNarrowedType
             return;
         }
 
