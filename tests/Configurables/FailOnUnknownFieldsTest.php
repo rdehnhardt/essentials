@@ -5,10 +5,6 @@ declare(strict_types=1);
 use Illuminate\Foundation\Http\FormRequest;
 use NunoMaduro\Essentials\Configurables\FailOnUnknownFields;
 
-beforeEach(function (): void {
-    FormRequest::failOnUnknownFields(false);
-});
-
 it('enables fail on unknown fields for form requests', function (): void {
     $failOnUnknownFields = new FailOnUnknownFields;
     $failOnUnknownFields->configure();
@@ -17,7 +13,10 @@ it('enables fail on unknown fields for form requests', function (): void {
     $property = $reflection->getProperty('globalFailOnUnknownFields');
 
     expect($property->getValue())->toBeTrue();
-});
+})->skip(
+    fn (): bool => ! method_exists(FormRequest::class, 'failOnUnknownFields'),
+    'failOnUnknownFields is not supported in this version of Laravel.'
+);
 
 it('is enabled by default', function (): void {
     $failOnUnknownFields = new FailOnUnknownFields;
@@ -32,3 +31,13 @@ it('can be disabled via configuration', function (): void {
 
     expect($failOnUnknownFields->enabled())->toBeFalse();
 });
+
+it('does nothing when failOnUnknownFields method does not exist', function (): void {
+    $failOnUnknownFields = new FailOnUnknownFields;
+    $failOnUnknownFields->configure();
+
+    expect($failOnUnknownFields->enabled())->toBeTrue();
+})->skip(
+    fn (): bool => method_exists(FormRequest::class, 'failOnUnknownFields'),
+    'failOnUnknownFields exists in this version of Laravel.'
+);
