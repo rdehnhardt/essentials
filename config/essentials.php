@@ -45,13 +45,13 @@ return [
     | the request contains fields that are not defined in the
     | form request rules.
     |
-    | Enabled by default.
+    | Disabled by default.
     |
     | Note: This option is only available in Laravel 13.4 and above.
     |
     */
 
-    NunoMaduro\Essentials\Configurables\FailOnUnknownFields::class => true,
+    NunoMaduro\Essentials\Configurables\FailOnUnknownFields::class => false,
 
     /*
     |--------------------------------------------------------------------------
